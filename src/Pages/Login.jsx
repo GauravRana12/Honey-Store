@@ -4,6 +4,7 @@ import "../Styles/Login.css";
 import { AuthContext } from "../Context/AuthContextProvider";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../Redux/Action";
+import { Flex, Image, Text } from "@chakra-ui/react";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,26 +14,26 @@ const Login = () => {
     email: "",
     password: "",
   });
+  var dt=useSelector((state)=>state)
 
-  const loginForm = (e) => {
+  const loginForm =async (e) => {
     e.preventDefault();
-    let data1 = signArray.filter((el) => {
-      return el.email === signData.email && el.password === signData.password;
-    });
+    try {
 
-    if (data1.length >= 1) {
-      dispatch(login);
-      navigate("/");
-      let data2 = signArray.filter((el) => {
-        if (el.email === signData.email && el.password === signData.password) {
-          return el.name;
-        }
-      });
-      setNameLogin(data2[0].name);
-      <Link to="/"></Link>;
-    } else {
-      alert("Please SignUp First or Fill correct Details");
+       dispatch(login(signData))
+    const token=localStorage.getItem('token');
+    console.log(token)
+    if(!token){
+      alert('wrong credentials');
     }
+
+    else{
+      navigate('/');
+    }
+    } catch (error) {
+      
+    }
+   
   };
 
   return (
@@ -40,14 +41,12 @@ const Login = () => {
       <div class="main_div">
         <div class="title">Login Form</div>
         <div class="social_icons">
-          <a href="https://www.facebook.com/campaign/landing.php?campaign_id=14884913640&extra_1=s%7Cc%7C589460569900%7Cb%7Cface%20book%20log%20in%7C&placement=&creative=589460569900&keyword=face%20book%20log%20in&partner_id=googlesem&extra_2=campaignid%3D14884913640%26adgroupid%3D128696221912%26matchtype%3Db%26network%3Dg%26source%3Dnotmobile%26search_or_content%3Ds%26device%3Dc%26devicemodel%3D%26adposition%3D%26target%3D%26targetid%3Dkwd-6167883633%26loc_physical_ms%3D1007824%26loc_interest_ms%3D%26feeditemid%3D%26param1%3D%26param2%3D&gclid=CjwKCAjwqZSlBhBwEiwAfoZUIM-tJmhVIDXIb9pn7G27SABd70_ZXYVdLQPShV47NqCJMIn6wLldoBoCUjoQAvD_BwE">
-            <i class="fab fa-facebook-f"></i> <span>Facebook</span>
-          </a>
-
-          <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Flogin%3Flang%3Den">
-            <i class="fab fa-twitter"></i>
-            <span>Twitter</span>
-          </a>
+        <Flex alignItems={"center"} justifyContent={"center"} cursor={"pointer"} onClick={()=> window.location.href='https://graceful-moth-scarf.cyclic.app/auth/google'}>
+						<Image src='https://res.cloudinary.com/dusavcufz/image/upload/v1698468993/tcavtkjymcfeum31lbsf.png' w={5} alt='Google logo' />
+						<Text mx='2' color={"blue.500"}>
+							Log in with Google
+						</Text>
+					</Flex>
         </div>
         <form onSubmit={loginForm}>
           <div class="input_box">

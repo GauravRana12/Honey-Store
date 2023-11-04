@@ -2,6 +2,7 @@ import React from "react";
 import {
   ADD_TO_CART,
   EMPTY_CART,
+  GET_CART,
   GET_RESTAURANTS_FAILURE,
   GET_RESTAURANTS_REQUEST,
   GET_RESTAURANTS_SUCCESS,
@@ -44,6 +45,8 @@ const reducer = (state = initialState, { type, payload }) => {
         ...state,
         cart: [...payload],
       };
+     case GET_CART:
+      return {...state,cart :payload} 
     case EMPTY_CART:
       return {
         ...state,

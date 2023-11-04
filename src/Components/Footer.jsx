@@ -21,7 +21,7 @@ const Footer = () => {
       <div className="Footer_main">
         <div>
           SHOP
-          <h4>
+          <h4 className="social">
             <Link
               to={"/product"}
               style={{ textDecoration: "none", color: "#185E49" }}
@@ -29,12 +29,12 @@ const Footer = () => {
               Products
             </Link>
           </h4>
-          <h4>
+          <h4 className="social">
             <Link style={{ textDecoration: "none", color: "#185E49" }}>
               About Us
             </Link>
           </h4>
-          <h4>
+          <h4 className="social">
             <Link style={{ textDecoration: "none", color: "#185E49" }}>
               Our Blog
             </Link>
@@ -42,12 +42,12 @@ const Footer = () => {
         </div>
         <div>
           INFO
-          <h4>
+          <h4 className="social">
             <Link style={{ textDecoration: "none", color: "#185E49" }}>
               Orders
             </Link>
           </h4>
-          <h4>
+          <h4 className="social">
             <Link style={{ textDecoration: "none", color: "#185E49" }}>
               FAQ
             </Link>
@@ -55,12 +55,12 @@ const Footer = () => {
         </div>
         <div>
           CONTACTS
-          <h4>
+          <h4 className="social">
             <Link style={{ textDecoration: "none", color: "#185E49" }}>
               Instagram
             </Link>
           </h4>
-          <h4>
+          <h4 className="social">
             <Link style={{ textDecoration: "none", color: "#185E49" }}>
               Facebook
             </Link>

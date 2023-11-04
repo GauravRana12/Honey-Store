@@ -7,7 +7,9 @@ export const GET_SINGLE_RESTAURANT_SUCCESS = "GET_SINGLE_RESTAURANT_SUCCESS";
 export const GET_SINGLE_RESTAURANT_FAILURE = "GET_SINGLE_RESTAURANT_FAILURE";
 
 export const ADD_TO_CART = "ADD_TO_CART";
+export const GET_CART="GET_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const EMPTY_CART = "EMPTY_CART";
 export const LOGOUT = "LOGOUT";
 export const LOGIN = "LOGIN";
+export const SIGN_UP="SIGN_UP";

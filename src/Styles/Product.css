@@ -4,6 +4,7 @@
   font-family: "Poppins", sans-serif;
   width: 85%;
   margin: auto;
+  margin-top: 150px;
 }
 .imgDiv {
   display: flex;

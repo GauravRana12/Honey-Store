@@ -15,7 +15,7 @@ const Subscribe = () => {
       </p>
       <div className="subscribe">
         <h1>SUBSCRIBE TO OUR NEWSLETTER</h1>
-        <h5>SIGNUP FOR NEWS,UPDATES AND SPECIAL OFFERS! LET IT BEE:)</h5>
+        <h5 className="signup_updates">SIGNUP FOR NEWS,UPDATES AND SPECIAL OFFERS! LET IT BEE:)</h5>
         <p>
           <input className="inp" placeholder="YOUR EMAIL"></input>{" "}
           <HomeButtons name={"SUBSCRIBE"} />

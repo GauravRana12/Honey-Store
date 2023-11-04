@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import style from "../Styles/nav.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,22 +14,25 @@ import { logout } from "../Redux/Action";
 
 const Nav = () => {
   const cart = useSelector((state) => state.cart);
+  const [prod,setProd]=useState('');
+  const auth=useSelector((state)=>state.isAuth);
   const dispatch = useDispatch();
   const { nameLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   console.log(nameLogin);
   const checking=useSelector(state=>state.isAuth);
   console.log(checking);
+console.log(process.env.REACT_APP_PORT)
 
   return (
     <div className="navbar">
       <Link to={"/"} style={{ textDecoration: "none", color: "#185e49" }}>
         <div>
-          <h2>LET IT BEE.CO</h2>
+          <h2 className="navTop">LET IT BEE.CO</h2>
         </div>
       </Link>
       <div className="navbar_element">
-        <Link to={"/product"}>
+        <input placeholder="Search product" onChange={(e)=>setProd(e.target.value)} className="searching" />
           <div className="navbar_icon1">
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
@@ -37,7 +40,7 @@ const Nav = () => {
               style={{ color: "#185e49" }}
             />
           </div>
-        </Link>
+        
         <Link to={"/login"}>
           <div className="navbar_icon2" style={{display:checking? "none":"block"}}>
             <FontAwesomeIcon
@@ -68,7 +71,7 @@ const Nav = () => {
                 left: "60%",
               }}
             >
-              {cart.length}
+              {auth ? cart.length:0}
             </span>
           </div>
         </Link>

@@ -4,19 +4,26 @@ import Styles from "../Styles/cartpage.css";
 import Items from "../Components/Items";
 import HomeButtons from "../Components/hompage_components/HomeButtons";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { getFromCart } from "../Redux/Action";
 
 const Cart = () => {
   const navigate = useNavigate();
   const data = useSelector((state) => state.cart);
+var dispatch=useDispatch();
   const handlePaymentClick = () => {
     navigate("/payment");
   };
   const handleBack = () => {
     navigate("/product");
   };
+
   const totalPrice = data.reduce((accumulator, item) => {
     return accumulator + item.price;
   }, 0);
+  useEffect(()=>{
+   dispatch(getFromCart)
+  },[])
   return (
     <div className="cart_page">
       <div className="cart_details">

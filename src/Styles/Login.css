@@ -5,9 +5,6 @@
     font-family: 'Poppins',sans-serif;
   } */
   .body{
-    display: grid;
-    height: 100vh;
-    place-items:center;
     background-color: whitesmoke;
   }
   .logName{
@@ -42,8 +39,6 @@
     line-height: 45px;
     text-align: center;
     border-radius: 5px;
-    font-size: 20px;
-    color: #fff;
     text-decoration: none;
     transition: all 0.3s linear;
   }
@@ -51,20 +46,8 @@
     margin-left: 5px;
     font-size: 18px;
   }
-  .social_icons a:first-child{
-    margin-right: 5px;
-    background: #4267B2;
-  }
-  .social_icons a:first-child:hover{
-    background: #375695;
-  }
-  .social_icons a:last-child{
-    margin-left: 5px;
-    background: #1DA1F2;
-  }
-  .social_icons a:last-child:hover{
-    background: #0d8bd9;
-  }
+
+
   form {
     margin-top: 25px;
   }
@@ -111,6 +94,10 @@
   .option_div .forget_div a{
     font-size: 16px;
     color: #be2edd;
+  }
+  .social_icons>a>img{
+   width: 70%;
+   margin: auto;
   }
   .button input{
     padding-left: 0;

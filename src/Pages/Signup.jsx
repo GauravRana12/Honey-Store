@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import "../Styles/Signup.css";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContextProvider";
+import { useDispatch } from "react-redux";
+import { signups } from "../Redux/Action";
 
 const Signup = () => {
   const { signArray, setSignArray } = useContext(AuthContext);
@@ -12,20 +14,14 @@ const Signup = () => {
     phone: "",
     password: "",
   });
-
+var navigate=useNavigate();
   console.log(log);
-
+var dispatch=useDispatch();
   const saveData = (e) => {
     e.preventDefault();
-    let logData = signArray.filter((elem) => {
-      return elem.email === log.email || elem.phone === log.phone;
-    });
-    if (logData.length >= 1) {
-      alert("All ready register");
-    } else {
-      setSignArray([...signArray, log]);
-      <Navigate to="/login" />;
-    }
+   dispatch(signups(log));
+      navigate('/login');
+    
   };
 
   return (

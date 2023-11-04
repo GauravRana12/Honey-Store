@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Styles from "../Styles/cartpage.css";
 import { useDispatch, useSelector } from "react-redux";
-import { removeCart } from "../Redux/Action";
+import { getFromCart, removeCart } from "../Redux/Action";
 const Items = ({ item, index }) => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.cart);
@@ -9,8 +9,11 @@ const Items = ({ item, index }) => {
 
   const handleRemove = () => {
     data.splice(index, 1);
-    dispatch(removeCart(data));
+    dispatch(removeCart(item._id));
   };
+  useEffect(()=>{
+dispatch(getFromCart);
+  },[])
   return (
     <>
       <div style={{ height: "9rem" }}>
