@@ -22,7 +22,6 @@ const Nav = () => {
   console.log(nameLogin);
   const checking=useSelector(state=>state.isAuth);
   console.log(checking);
-console.log(process.env.REACT_APP_PORT)
 
   return (
     <div className="navbar">

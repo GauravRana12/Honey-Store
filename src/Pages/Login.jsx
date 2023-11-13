@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import "../Styles/Login.css";
 import { AuthContext } from "../Context/AuthContextProvider";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../Redux/Action";
+import { googleLogIN, login } from "../Redux/Action";
 import { Flex, Image, Text } from "@chakra-ui/react";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -21,10 +22,10 @@ const Login = () => {
     try {
 
        dispatch(login(signData))
-    const token=localStorage.getItem('token');
+    const token=Cookies.get('token');
     console.log(token)
     if(!token){
-      alert('wrong credentials');
+      
     }
 
     else{
@@ -36,12 +37,17 @@ const Login = () => {
    
   };
 
+  const googleLogin=()=>{
+    window.location.href=`${process.env.REACT_APP_PORT}/auth/google`
+    dispatch(googleLogIN)
+  }
+
   return (
     <div className="body">
       <div class="main_div">
         <div class="title">Login Form</div>
         <div class="social_icons">
-        <Flex alignItems={"center"} justifyContent={"center"} cursor={"pointer"} onClick={()=> window.location.href='https://graceful-moth-scarf.cyclic.app/auth/google'}>
+        <Flex alignItems={"center"} justifyContent={"center"} cursor={"pointer"} onClick={googleLogin}>
 						<Image src='https://res.cloudinary.com/dusavcufz/image/upload/v1698468993/tcavtkjymcfeum31lbsf.png' w={5} alt='Google logo' />
 						<Text mx='2' color={"blue.500"}>
 							Log in with Google

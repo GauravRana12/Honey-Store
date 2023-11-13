@@ -13,6 +13,7 @@ import {
   LOGOUT,
   REMOVE_FROM_CART,
 } from "./ActionType";
+import Cookies from "js-cookie";
 
 
 const createAction = (type, payload) => {
@@ -25,7 +26,7 @@ export const getRestaurants = (curr, sort, cat) => async (dispatch) => {
     try {
       dispatch({ type: GET_RESTAURANTS_REQUEST });
       var res = await axios.get(
-        `https://graceful-moth-scarf.cyclic.app/product?page=${curr}&limit=9&sort=price&order=${sort}`
+        `${process.env.REACT_APP_PORT}/product?page=${curr}&limit=9&sort=price&order=${sort}`
       );
       console.log(res)
       dispatch({ type: GET_RESTAURANTS_SUCCESS, payload: res.data });
@@ -61,15 +62,19 @@ export const getSingleRestaurant = (id) => async (dispatch) => {
 };
 
 export const AddingTocrat = (id) => async (dispatch) => {
-  const token=localStorage.getItem('token');
+  try {
+   console.log('inside');
+    const token= Cookies.get('token');
   const header={
     Authorization:token
   }
-  try {
-    var ress = await axios.get(`${process.env.REACT_APP_PORT}/product/${id}`);
-    const cart=await axios.post(`${process.env.REACT_APP_PORT}/cart`,ress.data[0],{
-      headers:header
+    var ress = await axios.get(`${process.env.REACT_APP_PORT}/product/single/${id}`);
+    console.log(ress.data);
+    const cart=await axios.post(`${process.env.REACT_APP_PORT}/cart`,ress.data,{
+      headers:header,
+      withCredentials: true
     });
+    console.log('second');
     console.log("cart",ress.data)
     console.log("cart2",cart.data)
     dispatch({ type: ADD_TO_CART, payload: ress.data });
@@ -81,7 +86,7 @@ export const AddingTocrat = (id) => async (dispatch) => {
 
 export const getFromCart=async (dispatch)=>{
   try {
-    const token=localStorage.getItem('token');
+    const token=Cookies.get('token');
     const header={
       Authorization:token
     }
@@ -96,7 +101,7 @@ export const getFromCart=async (dispatch)=>{
 
 export const removeCart = (id)=>async (dispatch) => {
   try {
-    const token=localStorage.getItem('token');
+    const token=Cookies.get('token');
     const header={
       Authorization:token
     }
@@ -122,16 +127,18 @@ export const signups=(data)=>async (dispacth)=>{
 }
 
 export const logout = (dispatch) => {
-  localStorage.clear();
+  Cookies.remove('token')
   dispatch({ type: LOGOUT });
 };
 
 
 export const login =(dataa)=> async (dispatch) => {
 try {
- const res= await axios.post(`${process.env.REACT_APP_PORT}/user/login`,dataa);
- console.log(res)
-  localStorage.setItem('token',res.data);
+ const res= await axios.post(`${process.env.REACT_APP_PORT}/user/login`,dataa,{
+  withCredentials: true
+ });
+  Cookies.set('token',res.data);
+
   console.log(res.data)
   dispatch({ type: LOGIN });
  
@@ -139,3 +146,11 @@ try {
   console.log(error)
 }
 };
+
+export const googleLogIN=async (dispatch)=>{
+  try {
+    dispatch({type:LOGIN})
+  } catch (error) {
+    console.log(error);
+  }
+}
